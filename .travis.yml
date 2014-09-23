@@ -1,0 +1,35 @@
+branches:
+    only:
+        - master
+        - kaldi-patch
+
+compiler:
+    - g++
+
+# settings according http://blog.travis-ci.com/2012-12-18-travis-artifacts/#How-to-use%3F
+env:
+ global:
+   - "ARTIFACTS_AWS_REGION=us-east-1"
+   - "ARTIFACTS_S3_BUCKET=ufal-dsg"
+   - secure: "QJa3uAw5I+3b/hirylmpAg8JxQ/RZVXWenMCTmp+CvOS4GaRZPT5Q0+vx8k3CDFtqxnVlWVmpes/akbLvYbCFXfxFTscyY/dkmm3A4IOzBsxTLPXx9WNsWuCbqw+AwmqkOUPwhoneBTcbDpZqNF2YdE677tQen4V5qPu7DVb3ec="
+   - secure: "bCjjvj7yorDD1iUpFVl7MZLMl9qVNQXIrP7+06iO0sX+KPxnYzVUQavq8MJUABngSf+wji0oi7JSgU+RxI/ktFPj9BhYID3L5EJ3Tk4LKtwEMZjr7Ad78ebLK1S9a8J52HktrOAMiHsP7yCkkWDXcBjx/VIV8IHr1Yw8gOFaoNI="
+
+language: cpp
+
+install:
+    - mkdir travis-openfst
+    - ./configure --prefix=`pwd`/travis-openfst --enable-static --enable-shared --enable-far --enable-ngram-fsts CXX=g++ LIBS="-ldl"
+    - make install
+    - pushd travis-openfst ; [ -d lib64 ] && [ ! -d lib ] && ln -s lib64 lib  ; popd
+
+before_script:
+    - "gem install travis-artifacts"
+
+script:
+    - echo No tests TODO Just uploading to Amazon S3
+
+after_success: # and this only on success
+    - cp Makefile travis-openfst/Makefile  # Kaldi requires it for checking which openfst version is used
+    - tar cvzf travis-openfst.tar.gz travis-openfst
+    - if [[ $TRAVIS_BRANCH == 'kaldi-patch' ]] ; then travis-artifacts upload --path travis-openfst.tar.gz --target-path openfst-patched ; fi
+    # - travis-artifacts upload --path travis-openfst.tar.gz --target-path artifacts/$TRAVIS_BUILD_ID/$TRAVIS_JOB_ID # debugging
