@@ -78,8 +78,16 @@ class RefCounter {
   RefCounter() : count_(1) {}
 
   int count() const { return count_; }
-  int Incr() const { return ++count_; }
-  int Decr() const {  return --count_; }
+
+// below lines are modifications of openfst for multi-thrads support,
+// from tools/extras/openfst_gcc41up.patch, applied by tools/Makefile,
+// applicable to gcc 4.1 or above
+  // int Incr() const { return ++count_; }
+  // int Decr() const {  return --count_; }
+
+  int Incr() const { return __sync_add_and_fetch(&count_, 1); }
+  int Decr() const { return __sync_sub_and_fetch(&count_, 1); }
+// end modifications
 
  private:
   mutable int count_;
