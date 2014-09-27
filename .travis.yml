@@ -31,5 +31,5 @@ script:
 after_success: # and this only on success
     - cp Makefile travis-openfst/Makefile  # Kaldi requires it for checking which openfst version is used
     - tar cvzf travis-openfst.tar.gz travis-openfst
-    - if [[ $TRAVIS_BRANCH == 'kaldi-patch' ]] ; then travis-artifacts upload --path travis-openfst.tar.gz --target-path openfst-patched ; fi
+    - if [[ $TRAVIS_BRANCH == 'kaldi-patch' ]] ; then travis-artifacts upload --path travis-openfst.tar.gz --target-path openfst ; fi
     # - travis-artifacts upload --path travis-openfst.tar.gz --target-path artifacts/$TRAVIS_BUILD_ID/$TRAVIS_JOB_ID # debugging
