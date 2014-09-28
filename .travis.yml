@@ -11,8 +11,8 @@ env:
  global:
    - "ARTIFACTS_AWS_REGION=us-east-1"
    - "ARTIFACTS_S3_BUCKET=ufal-dsg"
-   - secure: "QJa3uAw5I+3b/hirylmpAg8JxQ/RZVXWenMCTmp+CvOS4GaRZPT5Q0+vx8k3CDFtqxnVlWVmpes/akbLvYbCFXfxFTscyY/dkmm3A4IOzBsxTLPXx9WNsWuCbqw+AwmqkOUPwhoneBTcbDpZqNF2YdE677tQen4V5qPu7DVb3ec="
-   - secure: "bCjjvj7yorDD1iUpFVl7MZLMl9qVNQXIrP7+06iO0sX+KPxnYzVUQavq8MJUABngSf+wji0oi7JSgU+RxI/ktFPj9BhYID3L5EJ3Tk4LKtwEMZjr7Ad78ebLK1S9a8J52HktrOAMiHsP7yCkkWDXcBjx/VIV8IHr1Yw8gOFaoNI="
+   - secure: "HZz2n4K+PWjd9Sw3z3IRYFmnkYKGZGlX6Z64qdq3d7Rc3fRhZ4HSfq1Ie0/oQO7de7TvbcCvCtlPnj+y6Ca5xkq5GnqAM7FFriy3AyQDqF/Cq/SuH6VGo6WqNpVTwKgT7+6/kbTCVcZ5BlkkGd0Y6K5MVGY7s59jkYznVbvwKMk="
+   - secure: "dlODcY+FHeHHHXXh/qQp7Bg0vazghLVbBCTnV3g8CtAuraS2ETKyc+lJ3orseY20v0OcnzsDXXqlFUQJppz05ayKokbyhbEKhG4v18l9TJ0doqQYrEjHiSGy1Etrxv5WeeJ12dJVM/zj83oMzRbhi3Jjv+uVpYuKvPb8kAFHRk0="
 
 language: cpp
 
