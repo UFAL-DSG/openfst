@@ -22,13 +22,11 @@ install:
     - make install
     - pushd travis-openfst ; [ -d lib64 ] && [ ! -d lib ] && ln -s lib64 lib  ; popd
 
-before_script:
-    - "gem install travis-artifacts"
-
 script:
     - echo No tests TODO Just uploading to Amazon S3
 
 after_success: # and this only on success
+    - "gem install travis-artifacts"
     - cp Makefile travis-openfst/Makefile  # Kaldi requires it for checking which openfst version is used
     - tar cvzf travis-openfst.tar.gz travis-openfst
     - if [[ $TRAVIS_BRANCH == 'kaldi-patch' ]] ; then travis-artifacts upload --path travis-openfst.tar.gz --target-path openfst ; fi
